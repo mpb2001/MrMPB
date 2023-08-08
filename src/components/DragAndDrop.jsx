@@ -36,7 +36,7 @@ class DragAndDrop extends React.Component {
             id="textItem"
             draggable="true"
             onDragStart={this.drag}
-            defaultValue="Text Item"
+            placeholder='Text'
           />
 
           <input
@@ -45,7 +45,7 @@ class DragAndDrop extends React.Component {
             id="numberItem"
             draggable="true"
             onDragStart={this.drag}
-            defaultValue="42"
+            placeholder='Number'
           />
 
           <input
@@ -54,7 +54,7 @@ class DragAndDrop extends React.Component {
             id="buttonItem"
             draggable="true"
             onDragStart={this.drag}
-            value="Button Item"
+            value="Button"
           />
         </div>
       </div>
