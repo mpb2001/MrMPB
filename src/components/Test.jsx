@@ -1,6 +1,5 @@
 import React from "react";
 import { nanoid } from "nanoid";
-import "../index.css";
 
 class Form extends React.Component {
     constructor(props) {

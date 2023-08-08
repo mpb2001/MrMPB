@@ -1,5 +1,4 @@
 import React from 'react';
-import '../index.css';
 
 class DragAndDrop extends React.Component {
   allowDrop = (event) => {
@@ -20,7 +19,7 @@ class DragAndDrop extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="drag-and-drop-container">
         <div
           className="box"
           id="targetBox"
@@ -30,32 +29,34 @@ class DragAndDrop extends React.Component {
           Drop items here
         </div>
 
-        <input
-          type="text"
-          className="item"
-          id="textItem"
-          draggable="true"
-          onDragStart={this.drag}
-          defaultValue="Text Item"
-        />
+        <div className="item-container">
+          <input
+            type="text"
+            className="item text-item"
+            id="textItem"
+            draggable="true"
+            onDragStart={this.drag}
+            defaultValue="Text Item"
+          />
 
-        <input
-          type="number"
-          className="item"
-          id="numberItem"
-          draggable="true"
-          onDragStart={this.drag}
-          defaultValue="42"
-        />
+          <input
+            type="number"
+            className="item number-item"
+            id="numberItem"
+            draggable="true"
+            onDragStart={this.drag}
+            defaultValue="42"
+          />
 
-        <input
-          type="button"
-          className="item"
-          id="buttonItem"
-          draggable="true"
-          onDragStart={this.drag}
-          value="Button Item"
-        />
+          <input
+            type="button"
+            className="item button-item"
+            id="buttonItem"
+            draggable="true"
+            onDragStart={this.drag}
+            value="Button Item"
+          />
+        </div>
       </div>
     );
   }
