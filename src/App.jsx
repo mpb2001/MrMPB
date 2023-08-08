@@ -1,14 +1,17 @@
-import Timer from "./components/Timer";
+// import Timer from "./components/Timer";
 // import Form from "./components/Form";
-import Test from "./components/test";
+// import Test from "./components/test";
+
+import DragAndDrop from "./components/DragAndDrop";
 
 
 function App() {
   return (
     <div>
-      <Timer />
+      {/* <Timer /> */}
       {/* <Form /> */}
-      <Test/>
+      {/* <Test/> */}
+      <DragAndDrop/>
     </div>
   );
 }
