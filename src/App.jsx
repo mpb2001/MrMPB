@@ -1,17 +1,12 @@
-// import Timer from "./components/Timer";
-// import Form from "./components/Form";
-// import Test from "./components/test";
+import Modal from "./components/modal";
 
-import DragAndDrop from "./components/DragAndDrop";
 
 
 function App() {
   return (
-    <div>
-      {/* <Timer /> */}
-      {/* <Form /> */}
-      {/* <Test/> */}
-      <DragAndDrop/>
+    <div className="App">
+      <h1>Modal Example</h1>
+      <Modal />
     </div>
   );
 }
