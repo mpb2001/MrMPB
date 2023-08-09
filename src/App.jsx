@@ -1,14 +1,10 @@
-import Modal from "./components/modal";
-
-
-
-function App() {
+import Form from '../src/components/Form'
+import Timer from '../src/components/Timer'
+export default function App() {
   return (
-    <div className="App">
-      <h1>Modal Example</h1>
-      <Modal />
+    <div>
+      <Timer />
+      <Form />
     </div>
-  );
+  )
 }
-
-export default App;

@@ -1,6 +1,5 @@
 import React from "react";
 import { nanoid } from "nanoid";
-import "../index.css";
 
 class Form extends React.Component {
     constructor(props) {
@@ -17,6 +16,13 @@ class Form extends React.Component {
             items: [],
             errors: {},
         };
+
+        this.inputFields = [
+            { name: "firstName", label: "First Name", type: "text", placeholder: "Enter first name" },
+            { name: "lastName", label: "Last Name", type: "text", placeholder: "Enter last name" },
+            { name: "age", label: "Age", type: "number", placeholder: "Enter age" },
+            { name: "number", label: "Number", type: "number", placeholder: "Enter number" },
+        ];
     }
 
     handleChange = (event) => {
@@ -128,7 +134,7 @@ class Form extends React.Component {
     };
 
     render() {
-        const { firstName, lastName, age, number, isEditing } = this.state.person;
+        const { isEditing } = this.state.person;
         const { items, errors } = this.state;
 
         return (
@@ -136,57 +142,20 @@ class Form extends React.Component {
                 <div className="form-container">
                     <h2 className="section-heading">Input Form</h2>
                     <div className="input-form" onKeyDown={this.handleKeyDown}>
-                        <div className={`input-group ${errors.firstName ? "input-error" : ""}`}>
-                            <label htmlFor="firstName">First Name:</label>
-                            <input
-                                type="text"
-                                id="firstName"
-                                name="firstName"
-                                value={firstName}
-                                placeholder="Enter first name"
-                                onChange={this.handleChange}
-                            />
-                            {errors.firstName && <span className="error-message">{errors.firstName}</span>}
-                        </div>
-
-                        <div className={`input-group ${errors.lastName ? "input-error" : ""}`}>
-                            <label htmlFor="lastName">Last Name:</label>
-                            <input
-                                type="text"
-                                id="lastName"
-                                name="lastName"
-                                value={lastName}
-                                placeholder="Enter last name"
-                                onChange={this.handleChange}
-                            />
-                            {errors.lastName && <span className="error-message">{errors.lastName}</span>}
-                        </div>
-
-                        <div className={`input-group ${errors.age ? "input-error" : ""}`}>
-                            <label htmlFor="age">Age:</label>
-                            <input
-                                type="number"
-                                id="age"
-                                name="age"
-                                value={age}
-                                placeholder="Enter age"
-                                onChange={this.handleChange}
-                            />
-                            {errors.age && <span className="error-message">{errors.age}</span>}
-                        </div>
-
-                        <div className={`input-group ${errors.number ? "input-error" : ""}`}>
-                            <label htmlFor="number">Number:</label>
-                            <input
-                                type="number"
-                                id="number"
-                                name="number"
-                                value={number}
-                                placeholder="Enter number"
-                                onChange={this.handleChange}
-                            />
-                            {errors.number && <span className="error-message">{errors.number}</span>}
-                        </div>
+                        {this.inputFields.map((field) => (
+                            <div key={field.name} className={`input-group ${errors[field.name] ? "input-error" : ""}`}>
+                                <label htmlFor={field.name}>{field.label}:</label>
+                                <input
+                                    type={field.type}
+                                    id={field.name}
+                                    name={field.name}
+                                    value={this.state.person[field.name]}
+                                    placeholder={field.placeholder}
+                                    onChange={this.handleChange}
+                                />
+                                {errors[field.name] && <span className="error-message">{errors[field.name]}</span>}
+                            </div>
+                        ))}
 
                         <button
                             type="button"
