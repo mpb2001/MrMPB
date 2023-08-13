@@ -6,7 +6,7 @@ const Modal = () => {
   const [inputValue, setInputValue] = useState('');
   const [keyValue, setKeyValue] = useState('');
   const [placeHolder, setPlaceHolder] = useState('');
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -28,10 +28,10 @@ const Modal = () => {
   };
 
   return (
-    <div className="modal-container">
-      <button className="open-modal-button" onClick={handleOpenModal}>
+    <div className="modal-container" onChange={handleOpenModal}>
+      {/* <button className="open-modal-button" onClick={setShowModal(true)}>
         Open Modal
-      </button>
+      </button> */}
       {showModal && (
         <div className="modal">
           <div className="modal-content">
@@ -62,6 +62,9 @@ const Modal = () => {
             />
             <button className="close-modal-button" onClick={handleCloseModal}>
               Close
+            </button>
+            <button className="submit-modal-button">
+              Submit
             </button>
           </div>
         </div>

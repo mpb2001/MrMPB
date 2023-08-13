@@ -1,10 +1,14 @@
 // import Modal from "./components/Modal"
-import DragAndDrop from "./components/DragAndDrop"
+
+import Testx from "./components/Testx"
+
+// import DragAndDrop from "./components/DragAndDrop"  
 function App() {
   return (
     <>
-      <DragAndDrop/>
+      {/* <DragAndDrop/> */}
       {/* <Modal /> */}
+      <Testx/>
     </>
   )
 }
