@@ -1,10 +1,11 @@
-import Form from '../src/components/Form'
-import Timer from '../src/components/Timer'
-export default function App() {
+// import Modal from "./components/Modal"
+import DragAndDrop from "./components/DragAndDrop"
+function App() {
   return (
-    <div>
-      <Timer />
-      <Form />
-    </div>
+    <>
+      <DragAndDrop/>
+      {/* <Modal /> */}
+    </>
   )
 }
+export default App

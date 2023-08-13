@@ -1,32 +1,73 @@
-// Modal.js
+
 import { useState } from 'react';
 
-function Modal() {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = () => {
-    setIsOpen(true);
+const Modal = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [keyValue, setKeyValue] = useState('');
+  const [placeHolder, setPlaceHolder] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleKeyValueChange = (e) => {
+    setKeyValue(e.target.value);
+  };
+  const handlePlaceHolderChange = (e) => {
+    setPlaceHolder(e.target.value);
   };
 
   return (
-    <div>
-      <button onClick={openModal}>Open Modal</button>
-
-      {isOpen && (
+    <div className="modal-container">
+      <button className="open-modal-button" onClick={handleOpenModal}>
+        Open Modal
+      </button>
+      {showModal && (
         <div className="modal">
           <div className="modal-content">
             <h2>Modal Title</h2>
-            <p>This is the content of the modal.</p>
-            <button onClick={closeModal}>Close</button>
+            <label htmlFor="placeHolder">Place Holder:</label>
+            <input
+              type="text"
+              id="placeHolder"
+              placeholder="Enter key Place Holder"
+              value={placeHolder}
+              onChange={handlePlaceHolderChange}
+            />
+            <label htmlFor="inputField">Label Name:</label>
+            <input
+              type="text"
+              id="inputField"
+              placeholder="Enter your text"
+              value={inputValue}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="keyValueField">Key Value:</label>
+            <input
+              type="text"
+              id="keyValueField"
+              placeholder="Enter key value"
+              value={keyValue}
+              onChange={handleKeyValueChange}
+            />
+            <button className="close-modal-button" onClick={handleCloseModal}>
+              Close
+            </button>
           </div>
         </div>
       )}
     </div>
   );
-}
+};
 
 export default Modal;

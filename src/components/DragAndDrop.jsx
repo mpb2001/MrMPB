@@ -1,65 +1,95 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
 
-class DragAndDrop extends React.Component {
-  allowDrop = (event) => {
-    event.preventDefault();
-  }
+function generateRandomId() {
+  const randomValue = Math.random().toString(36).substr(2, 9);
+  return randomValue;
+}
 
-  drag = (event) => {
-    event.dataTransfer.setData('text', event.target.id);
-  }
+function DragAndDrop() {
+  const [items] = useState([
+    { id: generateRandomId(), type: 'number', value: 42 },
+    { id: generateRandomId(), type: 'text', value: 'Hello, world!' },
+    { id: generateRandomId(), type: 'button', value: 'Click Me' },
+  ]);
 
-  drop = (event) => {
-    event.preventDefault();
-    const data = event.dataTransfer.getData('text');
-    const item = document.getElementById(data).cloneNode(true);
-    item.removeAttribute('id');
-    event.target.appendChild(item);
-  }
+  const [droppedItems, setDroppedItems] = useState([]);
 
-  render() {
-    return (
-      <div className="drag-and-drop-container">
-        <div
-          className="box"
-          id="targetBox"
-          onDrop={this.drop}
-          onDragOver={this.allowDrop}
-        >
-          Drop items here
-        </div>
+  const handleDragStart = (e, item) => {
+    e.dataTransfer.setData('text/plain', JSON.stringify(item));
+  };
 
-        <div className="item-container">
-          <input
-            type="text"
-            className="item text-item"
-            id="textItem"
-            draggable="true"
-            onDragStart={this.drag}
-            placeholder='Text'
-          />
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const droppedItem = JSON.parse(e.dataTransfer.getData('text/plain'));
+    setDroppedItems([...droppedItems, droppedItem]);
+  };
 
-          <input
-            type="number"
-            className="item number-item"
-            id="numberItem"
-            draggable="true"
-            onDragStart={this.drag}
-            placeholder='Number'
-          />
+  const handleInputChange = (index, event) => {
+    const newDroppedItems = [...droppedItems];
+    newDroppedItems[index].value = event.target.value;
+    setDroppedItems(newDroppedItems);
+  };
 
-          <input
-            type="button"
-            className="item button-item"
-            id="buttonItem"
-            draggable="true"
-            onDragStart={this.drag}
-            value="Button"
-          />
-        </div>
+  const handleButtonClick = (index) => {
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div className="App">
+      <div className="items-container">
+        <h2>Draggable Items</h2>
+        <ul className="items-list">
+          {items.map((item) => (
+            <li
+              key={item.id}
+              className="draggable-item"
+              draggable
+              onDragStart={(e) => handleDragStart(e, item)}
+            >
+              {item.type === 'button' ? (
+                <button className="button">{item.value}</button>
+              ) : (
+                item.value
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
-    );
-  }
+      <div
+        className="drop-container"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+      >
+        <h2>Dropped Items</h2>
+        <ul className="items-list">
+          {droppedItems.map((item, index) => (
+            <li key={item.id} className="dropped-item">
+              {item.type === 'button' ? (
+                <button
+                  onClick={() => handleButtonClick(index)}
+                  className="dropped-button"
+                >
+                  {item.value}
+                </button>
+              ) : (
+                <input
+                  type={item.type}
+                  value={item.value}
+                  onChange={(e) => handleInputChange(index, e)}
+                  placeholder={`Edit this ${item.type}...`}
+                  className="input-box"
+                />
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 }
 
 export default DragAndDrop;
