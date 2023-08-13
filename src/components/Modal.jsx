@@ -1,18 +1,26 @@
+import { useState, forwardRef, useImperativeHandle } from 'react';
 
-import { useState } from 'react';
-
-
-const Modal = () => {
+const Modal = forwardRef(function MyModal(props, ref) {
   const [inputValue, setInputValue] = useState('');
   const [keyValue, setKeyValue] = useState('');
   const [placeHolder, setPlaceHolder] = useState('');
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
+
+  useImperativeHandle(ref, () => ({
+
+    handleOpenModal() {
+      setShowModal(true);
+    }
+
+  }));
+
 
   const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleSubmitModal = () => {
     setShowModal(false);
   };
 
@@ -23,15 +31,13 @@ const Modal = () => {
   const handleKeyValueChange = (e) => {
     setKeyValue(e.target.value);
   };
+
   const handlePlaceHolderChange = (e) => {
     setPlaceHolder(e.target.value);
   };
 
   return (
-    <div className="modal-container" onChange={handleOpenModal}>
-      {/* <button className="open-modal-button" onClick={setShowModal(true)}>
-        Open Modal
-      </button> */}
+    <div className="modal-container" >
       {showModal && (
         <div className="modal">
           <div className="modal-content">
@@ -48,7 +54,7 @@ const Modal = () => {
             <input
               type="text"
               id="inputField"
-              placeholder="Enter your text"
+              placeholder="Enter your Label"
               value={inputValue}
               onChange={handleInputChange}
             />
@@ -63,7 +69,7 @@ const Modal = () => {
             <button className="close-modal-button" onClick={handleCloseModal}>
               Close
             </button>
-            <button className="submit-modal-button">
+            <button className="submit-modal-button" onClick={handleSubmitModal}>
               Submit
             </button>
           </div>
@@ -71,6 +77,8 @@ const Modal = () => {
       )}
     </div>
   );
-};
+})
 
-export default Modal;
+
+
+export default Modal

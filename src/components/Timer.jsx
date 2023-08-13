@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable no-undef */
 import { useEffect, useState } from "react";
 
 export default function Timer() {

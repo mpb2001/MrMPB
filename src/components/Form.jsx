@@ -1,6 +1,5 @@
 import React from "react";
 import { nanoid } from "nanoid";
-
 class Form extends React.Component {
     constructor(props) {
         super(props);

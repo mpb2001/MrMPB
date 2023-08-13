@@ -1,6 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable react/jsx-key */
-/* eslint-disable no-unused-vars */
 import { Component } from 'react';
 export default class Slist extends Component {
   constructor(props) {

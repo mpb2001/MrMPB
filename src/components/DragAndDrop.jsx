@@ -1,19 +1,22 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
-
+import { useRef, useState } from 'react';
+import MyModal from './Modal';
 function generateRandomId() {
-  const randomValue = Math.random().toString(36).substr(2, 9);
+  const randomValue = Math.random().toString(36);
   return randomValue;
 }
 
 function DragAndDrop() {
   const [items] = useState([
-    { id: generateRandomId(), type: 'number', value: 42},
-    { id: generateRandomId(), type: 'text', value: 'Hello, world!' },
+    { id: generateRandomId(), type: 'number', value: 1 },
+    { id: generateRandomId(), type: 'text', value: 'Text' },
     { id: generateRandomId(), type: 'button', value: 'Click Me' },
   ]);
-
+  const openModal = useRef(null);
   const [droppedItems, setDroppedItems] = useState([]);
+  const [setShowModal] = useState(false);
+  const [selectedInputIndex, setSelectedInputIndex] = useState(null);
+  const [inputValue, setInputValue] = useState('');
 
   const handleDragStart = (e, item) => {
     e.dataTransfer.setData('text/plain', JSON.stringify(item));
@@ -29,6 +32,14 @@ function DragAndDrop() {
     const newDroppedItems = [...droppedItems];
     newDroppedItems[index].value = event.target.value;
     setDroppedItems(newDroppedItems);
+  };
+
+  const handleInputDoubleClick = (index) => {
+    const selectedItem = droppedItems[index];
+    setSelectedInputIndex(index);
+    setInputValue(selectedItem.value);
+    openModal.current.handleOpenModal()
+    setShowModal(true);
   };
 
   const handleButtonClick = (index) => {
@@ -71,6 +82,7 @@ function DragAndDrop() {
               {item.type === 'button' ? (
                 <button
                   onClick={() => handleButtonClick(index)}
+                  onDoubleClick={() => handleInputDoubleClick(index)}
                   className="dropped-button"
                 >
                   {item.value}
@@ -78,7 +90,7 @@ function DragAndDrop() {
               ) : (
                 <input
                   type={item.type}
-                  value={item.value}
+                  onDoubleClick={() => handleInputDoubleClick(index)}
                   onChange={(e) => handleInputChange(index, e)}
                   placeholder={`Edit this ${item.type}...`}
                   className="input-box"
@@ -88,6 +100,15 @@ function DragAndDrop() {
           ))}
         </ul>
       </div>
+      <MyModal
+        ref={openModal}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        setShowModal={setShowModal}
+        selectedInputIndex={selectedInputIndex}
+        droppedItems={droppedItems}
+        setDroppedItems={setDroppedItems}
+      />
     </div>
   );
 }
