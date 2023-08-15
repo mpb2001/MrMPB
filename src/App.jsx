@@ -1,10 +1,9 @@
-// import DragAndDrop from "./components/DragAndDrop"
-import Test from "./components/Test"
+import TreeView from "./components/TreeView"
+
 function App() {
   return (
     <>
-      {/* <DragAndDrop /> */}
-      <Test/>
+      <TreeView />
     </>
   )
 }
