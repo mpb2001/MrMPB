@@ -1,8 +1,10 @@
-import DragAndDrop from "./components/DragAndDrop"
+// import DragAndDrop from "./components/DragAndDrop"
+import Test from "./components/Test"
 function App() {
   return (
     <>
-      <DragAndDrop />
+      {/* <DragAndDrop /> */}
+      <Test/>
     </>
   )
 }
